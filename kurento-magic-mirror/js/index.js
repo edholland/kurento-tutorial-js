@@ -152,17 +152,8 @@ window.addEventListener("load", function(event)
           });
           webRtcEp.gatherCandidates(onError);
 
-          pipeline.create('FaceOverlayFilter', function(error, filter) {
+          pipeline.create('GStreamerFilter', {command: 'videoflip method=clockwise'}, function(error, filter) {
             if (error) return onError(error);
-
-            console.log("Got FaceOverlayFilter");
-
-            filter.setOverlayedImage(args.hat_uri, -0.35, -1.2, 1.6, 1.6,
-            function(error) {
-              if (error) return onError(error);
-
-              console.log("Set overlay image");
-            });
 
             console.log("Connecting...");
 
